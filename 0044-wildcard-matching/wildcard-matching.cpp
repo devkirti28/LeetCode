@@ -10,18 +10,13 @@ private:
             }
             return true;
         }
-
-
         if(dp[i][j]!=-1)return dp[i][j];
         bool result=false;
-        if(p[j]!= '?' && p[j]!= '*'){
-            result = (p[j]==s[i])? dfs(i-1, j-1, s, p, dp) : false;
-        }
-        if(p[j]=='?'){
-           result =  dfs(i-1, j-1, s, p, dp);
+        if(p[j]!= '*'){
+            result = (p[j]==s[i] || p[j]=='?')? dfs(i-1, j-1, s, p, dp) : false;
         }
         if(p[j]=='*'){
-           result =  (dfs(i-1, j, s, p, dp) || dfs(i-1, j-1, s, p, dp) || dfs(i, j-1, s, p, dp));
+           result =  (dfs(i-1, j, s, p, dp) || dfs(i, j-1, s, p, dp));
         }
         return dp[i][j] = result;
     }
