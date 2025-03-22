@@ -13,12 +13,23 @@ public:
         int lower=1 , upper = sum;
         int randomInRange = lower + (rand() % (upper - lower + 1));
 
-        for(int i=0;i<pre.size();i++){
-            if(randomInRange <= pre[i]){
-                return i;
+        // for(int i=0;i<pre.size();i++){
+        //     if(randomInRange <= pre[i]){
+        //         return i;
+        //     }
+        // }
+
+        int left=0, right=pre.size()-1;
+        while(left<=right){
+            int mid = (left+right)/2;
+            if(randomInRange == pre[mid])return mid;
+            if(randomInRange > pre[mid]){
+                left = mid + 1;
+            }else {
+                right = mid - 1;
             }
         }
-        return -1;
+        return left;
     }
 };
 
