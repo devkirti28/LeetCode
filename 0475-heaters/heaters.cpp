@@ -18,10 +18,10 @@ public:
         sort(houses.begin(),houses.end());
         sort(heaters.begin(),heaters.end());
         int ans=0;
-        while(l<r){
+        while(l<=r){
             int mid = (l+r)/2;
             if(canCover(houses,heaters,mid)){
-                r=mid;
+                r=mid-1;
                 ans=mid;
             }else{
                 l=mid+1;
