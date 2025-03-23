@@ -18,18 +18,12 @@ public:
             i++;
         }
         // need to add new interval
-        int currentstart;
-        if(i<n){
-            currentstart = min(intervals[i][0],newstart);
-        }else{
-            currentstart = newstart;
-        }
-        int  currentend  = newend;
         while(i<n && newend >= intervals[i][0]){
-            currentend = max(newend,intervals[i][1]);
+            newstart = min(intervals[i][0],newstart);
+            newend = max(newend,intervals[i][1]);
             i++;
         }
-        answer.push_back({currentstart, currentend});
+        answer.push_back({newstart, newend});
         // add remaining intervals
         while(i<n){
             answer.push_back({intervals[i][0],intervals[i][1]});
