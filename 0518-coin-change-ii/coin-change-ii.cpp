@@ -15,25 +15,22 @@ class Solution {
 public:
     int change(int amount,vector<int>& coins ) {
         int n = coins.size();
-        vector<vector<int>> dp(n+1, vector<int>(amount+1,-1));
-        int ans = r(n, amount, coins, dp);
-        return (ans==1e9)? 0:ans;
-        
-        // for(int i=0;i<=amount;i++){
-        //     dp[0][i]=1e9;
-        // }
-        // dp[0][0]=0;
+        vector<vector<int>> dp(n+1, vector<int>(amount+1,0));
+        // int ans = r(n, amount, coins, dp);
+        // return (ans==1e9)? 0:ans;
 
-        // for(int i=1;i<=n;i++){
-        //     for(int j=0;j<=amount;j++){
-        //         int take = 1e9;
-        //         if(coins[i-1]<=j){
-        //             take = 1 + dp[i][j-coins[i-1]];
-        //         }
-        //         int notTake = dp[i-1][j];
-        //         dp[i][j] = min(take, notTake);
-        //     }
-        // }
-        // return (dp[n][amount]==1e9)? -1: dp[n][amount];
+        dp[0][0]=1;
+
+        for(int i=1;i<=n;i++){
+            for(int j=0;j<=amount;j++){
+                long long take = 0;
+                if(coins[i-1]<=j){
+                    take = dp[i][j-coins[i-1]];
+                }
+                long long notTake = dp[i-1][j];
+                dp[i][j] = take + notTake;
+            }
+        }
+        return dp[n][amount];
     }
 };
