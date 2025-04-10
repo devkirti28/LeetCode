@@ -1,27 +1,21 @@
 class MyCalendarThree {
-    map<int,int> intervals;
+private:
+    map<int,int> booked;
 public:
     MyCalendarThree() {
         
     }
     
     int book(int startTime, int endTime) {
-        int maxBook=0;
-        int ans=0;
-
-        intervals[startTime]++;
-        intervals[endTime]--;
-
-        for(auto it: intervals){
-            maxBook += it.second;
-            ans = max(ans,maxBook);
+        booked[startTime]++;
+        booked[endTime]--;
+        int count=0, maxCount=0;
+        bool tripleBooking=false;
+        for(auto time : booked){
+            count+= time.second;
+            maxCount = max(maxCount,count);
         }
-
-        // if(!ans){
-        //     intervals[startTime]--;
-        //     intervals[endTime]++;
-        // }
-        return ans;
+        return maxCount;
     }
 };
 
