@@ -1,32 +1,29 @@
 class MyCalendarTwo {
-    private:
-    // key -> startTime or EndTime 
-    // value -> 1 / -1
-        map<int,int> intervals;
+private:
+    map<int,int> booked;
 public:
     MyCalendarTwo() {
         
     }
     
     bool book(int startTime, int endTime) {
-        int maxBook=0;
-        int ans=true;
-
-        intervals[startTime]++;
-        intervals[endTime]--;
-
-        for(auto it: intervals){
-            maxBook += it.second;
-            if(maxBook>2){
-                ans =false;
-            } 
+        booked[startTime]++;
+        booked[endTime]--;
+        int count=0;
+        bool tripleBooking=false;
+        for(auto time : booked){
+            count+= time.second;
+            if(count>2){
+                tripleBooking=true;
+                break;
+            }
         }
-
-        if(!ans){
-            intervals[startTime]--;
-            intervals[endTime]++;
+        if(tripleBooking){
+            booked[startTime]--;
+            booked[endTime]++;
+            return false;
         }
-        return ans;
+        return true;
     }
 };
 
