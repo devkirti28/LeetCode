@@ -27,15 +27,15 @@ public:
     int maximum() {
         int ans=INT_MIN;
         auto it = s.rbegin();
-        ans=max(ans,*it);
-        return ans;
+        // ans=max(ans,);
+        return *it;
     }
     
     int minimum() {
         int ans=INT_MAX;
         auto it = s.begin();
-        ans=min(ans,*it);
-        return ans;
+        // ans=min(ans,*it);
+        return *it;
     }
 };
 
